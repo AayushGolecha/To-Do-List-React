@@ -25,7 +25,7 @@ const Box = (props) => {
     return (
         <div className='flex'>
             <input type='text' placeholder='Enter the task' value={props.userInput} onChange={handleInput} />
-            <button style={{ backgroundColor: "blue" }} onClick={addTask}>Add</button>
+            <button className='blue' onClick={addTask}>Add</button>
         </div>
     )
 }
