@@ -1,7 +1,7 @@
 .App {
   display: flex;
   width: 500px;
-  margin: 100px auto;
+  margin: 50px auto;
   background-color: yellow;
   height: 600px;
   flex-direction: column;
