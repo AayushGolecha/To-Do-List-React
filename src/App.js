@@ -1,59 +1,26 @@
-
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import Box from './inputbox'
-import Task from './task'
+import React, { useState,useEffect } from 'react';
+import Box from './components/inputbox'
+import Task from './components/todo-box'
 
 function App() {
+  
   const [userInput, setUserInput] = useState('')
-  const [tasks, setTasks] = useState(() => {
-    const json = localStorage.getItem('items');
-    if (!json) return [];
-    return JSON.parse(json);
-  });
-  const handleInput = (e) => {
-    setUserInput(e.target.value)
-  }
-  useEffect(() => {
-    if (tasks.length) {
-      localStorage.setItem('items', JSON.stringify(tasks));
-    }
-  }, [tasks]);
+  const [tasks, setTasks] = useState([])
 
-  const addTask = (e) => {
-    e.preventDefault()
-    if (userInput !== "") {
-      setTasks([...tasks, userInput])
-      setUserInput("")
-    }
-    else {
-      alert("Enter some task!")
-    }
-  }
+  // This hook checks if there is any tasks present in localstorage 
+  // it will written that else return an empty array
+  useEffect(()=>{
+    const values = JSON.parse(localStorage.getItem('tasks')) || [];
+    setTasks(values)
+  },[])
 
-  const remove = (i) => {
-    const newTask = tasks.filter((input) => input !== i)
-    setTasks(newTask)
-  }
-  const edit = (i) => {
-    const updateInput = prompt("Enter the new task")
-    if (updateInput.trim().length !== 0) {
-      const updated = tasks.map((e) => {
-        if (i === e) {
-          return [...updateInput]
-        }
-        else {
-          return e
-        }
-      });
-      setTasks(updated)
-    }
-  }
   return (
     <div className="App">
       <h1>TO-DO-LIST</h1>
-      <Box handleInput={handleInput} addTask={addTask} userInput={userInput} />
-      <Task tasks={tasks} remove={remove} edit={edit} />
+      <div className='bod'></div>
+      <Box userInput={userInput} setUserInput={setUserInput} tasks={tasks} setTasks={setTasks} />
+      <Task tasks={tasks} setTasks={setTasks} />
     </div>
   );
 }
