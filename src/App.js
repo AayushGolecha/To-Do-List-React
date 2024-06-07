@@ -11,10 +11,11 @@ function App() {
   const [check, setCheck] = useState(false)
   const [dataFromTask, setDataFromTask] = useState(0);
 
-  function handleDataFromTask(val) {
-    setDataFromTask(val);
+  // gets the index value from todo-box.js
+  function handleDataFromTask(i) {
+    setDataFromTask(i);
   }
-  //console.log(dataFromTask)
+
   // This hook checks if there is any tasks present in localstorage 
   // it will written that else return an empty array
   useEffect(()=>{
@@ -26,9 +27,7 @@ function App() {
     <div className="App">
       <h1>TO-DO-LIST</h1>
       <div className='bod'></div>
-      {/* <Box userInput={userInput} setUserInput={setUserInput} tasks={tasks} setTasks={setTasks} /> */}
-      {/* <Task tasks={tasks} setTasks={setTasks} check={check} setCheck={setCheck}/> */}
-      <>{check ? <Edit userInput={userInput} setUserInput={setUserInput} setCheck={setCheck} check={check} val={dataFromTask}/>:<div><Box userInput={userInput} setUserInput={setUserInput} tasks={tasks} setTasks={setTasks} />
+      <>{check ? <Edit userInput={userInput} setUserInput={setUserInput} setCheck={setCheck} check={check} val={dataFromTask} tasks={tasks} setTasks={setTasks}/>:<div><Box userInput={userInput} setUserInput={setUserInput} tasks={tasks} setTasks={setTasks} />
       <Task tasks={tasks} setTasks={setTasks} check={check} setCheck={setCheck} sendData={handleDataFromTask}/></div>}</>
     </div>
   );

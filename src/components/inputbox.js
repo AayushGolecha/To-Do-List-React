@@ -24,6 +24,8 @@ const Box = (props) => {
             setCheck(!check)
         }
     }
+
+    // checks the input field if empty gives error
     useEffect(()=>{
         if(props.userInput !== ""){
             setCheck(false)
